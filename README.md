@@ -1,2 +1,1 @@
-# Otus
-Otus learning courses
+# Andrey M homeworks
