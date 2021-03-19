@@ -13,25 +13,39 @@ def power_numbers(*list_of_numbers):
     """
     return [num ** 2 for num in list_of_numbers]
 
+
 # filter types
 ODD = "odd"
 EVEN = "even"
 PRIME = "prime"
 
+
 def is_odd(x):
     return x % 2 != 0
+
 
 def is_even(x):
     return x % 2 == 0
 
+
 def is_prime(x):
-    return 2 in [x, 2 ** x % x]
+    if x == 2 or x == 3:
+        return True
+    if x % 2 == 0 or x < 2:
+        return False
+    for i in range(3, int(x ** 0.5) + 1, 2):
+        if x % i == 0:
+            return False
+
+    return True
+
 
 types = {
     ODD: is_odd,
     EVEN: is_even,
     PRIME: is_prime
 }
+
 
 def filter_numbers(list_of_numbers, type_of_numbers):
     """
