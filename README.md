@@ -5,7 +5,7 @@
 Tree:
 
 - [X] homework_01
-- [ ] homework_02
+- [X] homework_02
 - [ ] homework_03
 - [ ] homework_04
 - [ ] homework_05
@@ -15,3 +15,8 @@ Tree:
 - [ ] homework_09
 - [ ] homework_10
 - [ ] homework_11
+
+### Notes
+
+    # pytest
+    $ pytest testing/test_homework_* -s -vv
