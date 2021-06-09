@@ -33,9 +33,7 @@ async def sync_db(rows: list):
         session: AsyncSession
 
         async with session.begin():
-            session.sync_all(rows)
-
-        await session.commit()
+            session.add_all(rows)
 
 
 def json_user_model(user: dict) -> User:
