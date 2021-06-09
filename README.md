@@ -6,7 +6,7 @@ Tree:
 
 - [X] homework_01
 - [X] homework_02
-- [ ] homework_03
+- [X] homework_03
 - [ ] homework_04
 - [ ] homework_05
 - [ ] homework_06
