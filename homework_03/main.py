@@ -19,7 +19,7 @@ from sqlalchemy.orm import selectinload
 
 from homework_03.models import engine, Base, User, Session, Post
 from sqlalchemy.ext.asyncio import AsyncSession
-from homework_03.jsonplaceholder_requests import fetch_json
+from homework_03.jsonplaceholder_requests import get_data
 
 
 async def new_table():
@@ -83,7 +83,7 @@ async def fetch_users_posts_count():
 
 async def async_main():
     await new_table()
-    raw_users, raw_posts = await fetch_json()
+    raw_users, raw_posts = await get_data()
     users = [json_user_model(user) for user in raw_users]
     posts = [json_post_model(post) for post in raw_posts]
     await sync_db(users)
