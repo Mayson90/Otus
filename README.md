@@ -7,7 +7,7 @@ Tree:
 - [X] homework_01
 - [X] homework_02
 - [X] homework_03
-- [ ] homework_04
+- [X] homework_04
 - [ ] homework_05
 - [ ] homework_06
 - [ ] homework_07
