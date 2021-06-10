@@ -42,7 +42,7 @@ jobs:
             if [ -f "$HW_REQUIREMENTS_PATH" ];
             then
               echo file \'"$HW_REQUIREMENTS_PATH"\' exists, installing...
-              pip install п-r "$HW_REQUIREMENTS_PATH";
+              pip install -r "$HW_REQUIREMENTS_PATH";
             fi
         done
     - name: Install project-level dependencies
