@@ -8,8 +8,8 @@ Tree:
 - [X] homework_02
 - [X] homework_03
 - [X] homework_04
-- [ ] homework_05
-- [ ] homework_06
+- [X] homework_05
+- [X] homework_06
 - [ ] homework_07
 - [ ] homework_08
 - [ ] homework_09
