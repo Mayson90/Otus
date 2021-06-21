@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  django-app:
+    build:
+      context: ./django_ecommerce
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: 'true'
