@@ -12,7 +12,7 @@ Tree:
 - [X] homework_06
 - [X] homework_07
 - [X] homework_08
-- [ ] homework_09
+- [X] homework_09
 - [ ] homework_10
 - [ ] homework_11
 
