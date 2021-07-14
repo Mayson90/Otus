@@ -11,7 +11,7 @@ Tree:
 - [X] homework_05
 - [X] homework_06
 - [X] homework_07
-- [ ] homework_08
+- [X] homework_08
 - [ ] homework_09
 - [ ] homework_10
 - [ ] homework_11
@@ -20,3 +20,6 @@ Tree:
 
     # pytest
     $ pytest testing/test_homework_* -s -vv
+
+
+branch for pull requests - *homeworks_check*
