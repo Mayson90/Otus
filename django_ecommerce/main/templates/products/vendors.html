@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Vendors</h1>
+<br>
+<ul>
+    {% for item in object_list %}
+    <li>
+        <a href="{% url 'main:vendor_detail' slug=item.slug %}">{{item.vendor.name}}</a>
+    </li>
+    {% endfor %}
+</ul>
+<br>
+<div class="row">
+    <div class="col-1">
+        <a aria-disabled="true" class="btn btn-warning btn-lg" href="{% url 'main:products' %}" role="button" tabindex="-1">Back</a>
+    </div>
+</div>
+{% endblock %}
