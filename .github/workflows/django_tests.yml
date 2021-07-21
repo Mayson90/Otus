@@ -37,8 +37,11 @@ jobs:
     - name: Test with Django test
       run: |
         coverage run --source='.' manage.py test
+        coerage xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
+      with:
+        file: ./coverage.xml
 
   deploy:
     needs: run-tests
