@@ -9,7 +9,7 @@ defaults:
     working-directory: homework_09/django_ecommerce
 
 jobs:
-  run-tests:
+  django-tests:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -46,7 +46,7 @@ jobs:
         fail_ci_if_error: true
 
   deploy:
-    needs: run-tests
+    needs: django-tests
     runs-on: ubuntu-latest
     steps:
       - name: send webhook to @ma90Bot
