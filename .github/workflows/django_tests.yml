@@ -36,7 +36,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with Django test
       run: |
-        python manage.py test
+        coverage run --source='.' manage.py test
+    - name: Upload coverage to Codecov
+    - uses: actions/checkout@master
+    - uses: codecov/codecov-action@v2
 
   deploy:
     needs: run-tests
