@@ -38,6 +38,7 @@ jobs:
       run: |
         coverage run --source='.' manage.py test
         coverage xml
+        cat /home/runner/work/Otus/Otus/coverage.xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
