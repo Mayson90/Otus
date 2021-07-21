@@ -37,3 +37,14 @@ jobs:
     - name: Test with Django test
       run: |
         python manage.py test
+
+  deploy:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: send webhook to @ma90Bot
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: homework_09 build successful
