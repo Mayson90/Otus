@@ -38,11 +38,11 @@ jobs:
       run: |
         coverage run --source='.' manage.py test
         coverage xml
-        cat /home/runner/work/Otus/Otus/coverage.xml
+        cat /home/runner/work/Otus/Otus/homework_09/django_ecommerce/coverage.xml
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
-        file: coverage.xml
+        file: ./homework_09/django_ecommerce/coverage.xml
         fail_ci_if_error: true
 
   deploy:
