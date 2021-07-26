@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="bg-light p-5 rounded">
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <hr>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <a class="btn btn-warning" href="{% url 'users:register' %}" role="button">Register</a>
+    </form>
+</div>
+{% endblock %}
