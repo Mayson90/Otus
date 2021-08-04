@@ -15,7 +15,7 @@ class HomeView(ListView):
 class ProductsListView(ListView):
     model = Product
     template_name = 'products/products.html'
-    # paginate_by = 4
+    paginate_by = 3
 
 
 class VendorsListView(ListView):
