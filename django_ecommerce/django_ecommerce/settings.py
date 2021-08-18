@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'users',
     # DEBUG TOOLBAR
     'debug_toolbar',
+    # OTHER
+    'django_countries',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
