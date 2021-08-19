@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 
-from users.views import UserCreateView, AuthView, UserLogoutView
+from .views import UserCreateView, AuthView, UserLogoutView
 
 app_name = 'users'
 

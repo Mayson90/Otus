@@ -9,13 +9,13 @@ from .models import NewUser
 class UserCreateView(CreateView):
     model = NewUser
     template_name = 'users/register.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('users:login')
     form_class = NewUserCreationForm
 
 
 class AuthView(LoginView):
     template_name = 'users/login.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('main:home')
 
 
 class UserLogoutView(LogoutView):

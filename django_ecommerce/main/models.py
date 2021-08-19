@@ -50,7 +50,7 @@ class Vendor(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=32)
-    description = models.TextField(null=True)
+    description = models.TextField(null=True, default='This is description.')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
     cost = models.IntegerField(null=False)

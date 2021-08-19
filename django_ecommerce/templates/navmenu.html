@@ -6,7 +6,7 @@
             <span class="fs-4">IT Marketplace</span>
         </a>
         {% if request.user.is_authenticated %}
-        <a class="nav-link active me-md-auto" href="{% url 'users:logout' %}">
+        <a class="nav-link active me-md-auto" href="{% url 'users:logout' %}">{{user.username}}
             <svg class="bi bi-door-open" fill="currentColor" height="26" viewBox="0 0 16 16" width="26"
                  xmlns="http://www.w3.org/2000/svg">
                 <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
@@ -35,7 +35,13 @@
             <li class="nav-item"><a class="nav-link" href="{% url 'main:products' %}">Products</a></li>
         </ul>
     </header>
-    {% if request.user.is_authenticated %}
-    <div class="alert alert-primary s" role="alert">Welcome, <strong>{{user.username}}</strong>!</div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-info s" role="alert">{{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
     {% endif %}
 </div>
