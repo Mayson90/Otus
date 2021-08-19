@@ -1,71 +1,91 @@
 {% extends "base.html" %}
-{% block title %}
-
-{% endblock %}
 
 {% block content %}
-<section class="text-center mb-4">
-    <div class="row">
-        <div class="col-1">
-            <a aria-disabled="true" class="btn btn-warning btn-lg" href="{% url 'main:products' %}" role="button"
-               tabindex="-1">Back</a>
-        </div>
+<div class="row">
+    <div class="col-1">
+        <a aria-disabled="true" class="btn btn-warning btn-lg" href="{% url 'main:categories' %}" role="button"
+           tabindex="-1">Back</a>
     </div>
-    <br>
+</div>
+<br>
+<section class="text-center mb-4">
     <div class="row wow fadeIn">
-        {% for item in object_list %}
-        <div class="col-lg-4 col-md-6 mb-2">
-            <div class="card">
-                <div class="view overlay">
-                    <img height="100px" src="{{item.img.url}}">
-                    <div class="mask rgba-white-slight"></div>
-                </div>
-                <div class="card-body py-2"><a class="product-meta d-block fs-xs"
-                                               href="{% url 'main:category_detail' slug=item.slug %}">{{item.category}}</a>
-                    <div class="card-body"><a class="product-meta d-block fs-s pb-2"
-                                              href="{% url 'main:vendor_detail' slug=item.slug %}">{{item.vendor}}</a>
-                        <h3 class="product-title fs-sm"><a href="{% url 'main:product_detail' slug=item.slug %}">{{item.name}}</a></h3>
-                        <div class="d-flex justify-content-between">
-                            <div class="product-price"><span class="text-accent">${{item.cost}}.<small>00</small></span>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card-group">
+                    {% for item in object_list %}
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="view overlay">
+                                <img height="50px" src="{{item.img.url}}">
+                                <div class="mask rgba-white-slight"></div>
                             </div>
-                            <div class="star-rating"><i class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star-filled active"></i><i
-                                    class="star-rating-icon ci-star"></i>
+                            <div class="card-body py-2"><a class="product-meta d-block fs-xs"
+                                                           href="{% url 'main:category_detail' slug=item.category.id %}">{{item.category}}</a>
+                                <div class="card-body"><a class="product-meta d-block fs-s pb-2"
+                                                          href="{% url 'main:vendor_detail' slug=item.vendor.id %}">{{item.vendor}}</a>
+                                    <h5 class="product-title fs-sm"><a
+                                            href="{{item.get_absolute_url}}">{{item.name}}</a></h5>
+                                    <div class="justify-content-between">
+                                        <div class="product-price"><span
+                                                class="text-accent">${{item.cost}}</span>
+                                        </div>
+                                        <div class="star-rating"><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star-filled active"></i><i
+                                                class="star-rating-icon ci-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body card-body-hidden">
+                                <div class="text-center pb-2">
+                                </div>
+                                <a aria-disabled="true" class="btn btn-primary btn-sm d-block w-100 mb-2"
+                                   href="{{item.get_add_to_cart_url}}" role="button" tabindex="-1">Add to Cart</a>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                <div class="card-body card-body-hidden">
-                    <div class="text-center pb-2">
-                    </div>
-                    <button class="btn btn-primary btn-sm d-block w-100 mb-2" type="button"><i
-                            class="ci-cart fs-sm me-1"></i>Add to Cart
-                    </button>
-                </div>
+                <!-- Pagination-->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation" class="d-flex justify-content-between pt-2">
+        {% if page_obj.has_previous %}
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                    Prev
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+        <ul class="pagination">
+            <li class="page-item active">
+                <a href="?page={{ page_obj.number }}">
+                        <span class="page-link">{{ page_obj.number }}</span>
+                </a>
+            </li>
+            </li>
+        </ul>
+        {% if page_obj.has_next %}
+        <ul class="pagination">
+            <li class="page-item">
+                <a aria-label="Next" class="page-link" href="?page={{ page_obj.next_page_number }}">
+                Next
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+    </nav>
+    {% endif %}
+            </div>
+            <div class="col-md-4 mb-4">
+                {% include "search_snippet.html" %}
             </div>
         </div>
-        {% endfor %}
     </div>
-    <!-- Pagination-->
-    <nav aria-label="Page navigation" class="d-flex justify-content-between pt-2">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#"><i class="ci-arrow-left me-2"></i>Prev</a></li>
-        </ul>
-        <ul class="pagination">
-            <li class="page-item d-sm-none"><span class="page-link page-link-static">1 / 5</span></li>
-            <li aria-current="page" class="page-item active d-none d-sm-block"><span class="page-link">1<span
-                    class="visually-hidden">(current)</span></span></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">2</a></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">3</a></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">4</a></li>
-            <li class="page-item d-none d-sm-block"><a class="page-link" href="#">5</a></li>
-        </ul>
-        <ul class="pagination">
-            <li class="page-item"><a aria-label="Next" class="page-link" href="#">Next<i
-                    class="ci-arrow-right ms-2"></i></a></li>
-        </ul>
-    </nav>
 </section>
 {% endblock %}

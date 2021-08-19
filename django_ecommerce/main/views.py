@@ -26,26 +26,23 @@ class HomeView(ListView):
 class ProductsListView(ListView):
     model = Product
     template_name = 'products/products.html'
-    paginate_by = 3
+    paginate_by = 6
 
 
 class VendorsListView(ListView):
     model = Product
     template_name = 'products/vendors.html'
 
-    # def get_queryset(self):
-    #     object_list = Product.objects.select_related('vendor')
-    #     return object_list.filter(pk__in=[1, 2, 3, 4, 5, 6])
-    #     # return Product.objects.select_related('vendor').distinct()
+    def get_queryset(self):
+        return Product.objects.distinct('vendor_id')
 
 
 class CategoryListView(ListView):
     model = Product
     template_name = 'products/categories.html'
 
-    # def get_queryset(self):
-    #     object_list = Product.objects.select_related('category')
-    #     return object_list.filter(pk__in=[1, 2, 3, 4])
+    def get_queryset(self):
+        return Product.objects.distinct('category_id')
 
 
 class ProductsDetailView(DetailView):
@@ -57,24 +54,24 @@ class VendorDetailsListView(ListView):
     model = Product
     template_name = 'products/vendor_detail.html'
 
-    # def get(self, *args, **kwargs):
-    #     self.vendor_id = kwargs['vendor_id']
-    #     return super().get(*args, **kwargs)
-    #
-    # def get_queryset(self):
-    #     return Product.objects.filter(vendor__id=self.vendor_id)
+    def get(self, *args, **kwargs):
+        self.slug = kwargs['slug']
+        return super().get(*args, **kwargs)
+
+    def get_queryset(self,*args, **kwargs):
+        return Product.objects.filter(vendor__id=self.slug)
 
 
 class CategoryDetailsListView(ListView):
     model = Product
     template_name = 'products/category_detail.html'
 
-    # def get(self, *args, **kwargs):
-    #     self.category_id = kwargs['category_id']
-    #     return super().get(*args, **kwargs)
-    #
-    # def get_queryset(self):
-    #     return Product.objects.filter(category__id=self.category_id)
+    def get(self, *args, **kwargs):
+        self.slug = kwargs['slug']
+        return super().get(*args, **kwargs)
+
+    def get_queryset(self,*args, **kwargs):
+        return Product.objects.filter(category__id=self.slug)
 
 
 class OrderSummaryView(LoginRequiredMixin, View):

@@ -6,7 +6,7 @@
 <ul>
     {% for item in object_list %}
     <li>
-        <a href="{% url 'main:vendor_detail' slug=item.slug %}">{{item.vendor.name}}</a>
+        <a href="{% url 'main:vendor_detail' slug=item.vendor.id %}">{{item.vendor.name}}</a>
     </li>
     {% endfor %}
 </ul>
