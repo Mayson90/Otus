@@ -15,20 +15,6 @@ class TestHomeView(TestCase):
         self.assertIn('object_list', response.context)
 
 
-class TestCategoryView(TestCase):
-
-    def test_back_button_categories(self):
-        response = self.client.get('/categories/')
-        self.assertIn(b'Back', response.content)
-
-
-class TestVendorView(TestCase):
-
-    def test_back_button(self):
-        response = self.client.get('/vendors/')
-        self.assertIn(b'Back', response.content)
-
-
 class TestProductView(TestCase):
 
     def test_add_to_cart_button(self):

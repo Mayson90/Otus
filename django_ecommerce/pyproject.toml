@@ -13,6 +13,7 @@ mixer = "^7.1.2"
 django-countries = "^7.2.1"
 django-crispy-forms = "^1.12.0"
 stripe = "^2.60.0"
+coverage = "^5.5"
 
 [tool.poetry.dev-dependencies]
 psycopg2-binary = "^2.9.1"
