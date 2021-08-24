@@ -17,7 +17,7 @@ class TestHomeView(TestCase):
 
 class TestCategoryView(TestCase):
 
-    def test_back_button(self):
+    def test_back_button_categories(self):
         response = self.client.get('/categories/')
         self.assertIn(b'Back', response.content)
 

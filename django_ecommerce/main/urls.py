@@ -3,7 +3,8 @@ from django.conf.urls.static import static
 from django.urls import path
 
 from .views import HomeView, ProductsListView, ProductsDetailView, VendorsListView, VendorDetailsListView, \
-    CategoryListView, CategoryDetailsListView, OrderSummaryView, CheckoutView, add_to_cart, remove_from_cart, remove_single_product_from_cart
+    CategoryListView, CategoryDetailsListView, OrderSummaryView, CheckoutView, PaymentView, add_to_cart, \
+    remove_from_cart, remove_single_product_from_cart
 
 app_name = 'main'
 
@@ -17,6 +18,7 @@ urlpatterns = [
     path('category_detail/<slug>/', CategoryDetailsListView.as_view(), name='category_detail'),
     path('order-summary/', OrderSummaryView.as_view(), name='order_summary'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
+    path('payment/<payment_option>/', PaymentView.as_view(), name='payment'),
     path('add-to-cart/<slug>/', add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove_from_cart'),
     path('remove-product-from-cart/<slug>/', remove_single_product_from_cart, name='remove_single_product_from_cart'),

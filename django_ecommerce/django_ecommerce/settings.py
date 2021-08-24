@@ -149,3 +149,5 @@ LOGOUT_REDIRECT_URL = '/users/login/'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+STRIPE_SECRET_KEY = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
