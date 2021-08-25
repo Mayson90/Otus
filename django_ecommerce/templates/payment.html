@@ -122,7 +122,9 @@
                                            style="border: none !important; display: block !important; position: absolute !important; height: 1px !important; top: 0px !important; left: 0px !important; padding: 0px !important; margin: 0px !important; width: 100% !important; opacity: 0 !important; background: transparent !important; pointer-events: none !important; font-size: 16px !important;">
                                 </div>
                             </div>
-
+                            <i style="color:#FF0000">
+                                *use VISA <b style="color:#000000">4242424242424242</b> number just to test that stripe is working
+                            </i>
                             <!-- Used to display form errors. -->
                             <div id="card-errors" role="alert"></div>
                         </div>
@@ -146,7 +148,7 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 <script nonce="">  // Create a Stripe client.
-  var stripe = Stripe('{{STRIPE_SECRET_KEY}}');
+  var stripe = Stripe('{{STRIPE_PUBLIC_KEY}}');
 
   // Create an instance of Elements.
   var elements = stripe.elements();

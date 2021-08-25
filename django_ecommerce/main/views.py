@@ -265,21 +265,20 @@ class PaymentView(View):
         order = Order.objects.get(user=self.request.user, ordered=False)
         context = {
             'order': order,
-            'STRIPE_SECRET_KEY': settings.STRIPE_SECRET_KEY
+            'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
         }
         return render(self.request, "payment.html", context)
 
     def post(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
-        token = self.request.POST.get('stripeToken')
+        # token = self.request.POST.get('stripeToken')
         amount = int(order.get_total() * 100)
 
         try:
             charge = stripe.Charge.create(
                 amount=amount,  # cents
                 currency="usd",
-                description='Example charge',
-                source=token
+                source="tok_visa"
             )
 
             # create the payment
