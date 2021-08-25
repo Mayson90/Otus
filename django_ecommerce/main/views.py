@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.views.generic import ListView, DetailView, View
 
 from .forms import CheckoutForm
-from .models import Product, Vendor, Order, OrderProduct, Address, Payment
+from .models import Product, Vendor, Order, OrderProduct, BillingAddress, Payment
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -102,18 +102,8 @@ class CheckoutView(View):
                 'order': order,
             }
 
-            shipping_address_qs = Address.objects.filter(
+            billing_address_qs = BillingAddress.objects.filter(
                 user=self.request.user,
-                address_type='S',
-                default=True
-            )
-            if shipping_address_qs.exists():
-                context.update(
-                    {'default_shipping_address': shipping_address_qs[0]})
-
-            billing_address_qs = Address.objects.filter(
-                user=self.request.user,
-                address_type='B',
                 default=True
             )
             if billing_address_qs.exists():
@@ -129,77 +119,22 @@ class CheckoutView(View):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
             if form.is_valid():
-
-                use_default_shipping = form.cleaned_data.get(
-                    'use_default_shipping')
-                if use_default_shipping:
-                    print("Using the defualt shipping address")
-                    address_qs = Address.objects.filter(
-                        user=self.request.user,
-                        address_type='S',
-                        default=True
-                    )
-                    if address_qs.exists():
-                        shipping_address = address_qs[0]
-                        order.shipping_address = shipping_address
-                        order.save()
-                    else:
-                        messages.info(
-                            self.request, "No default shipping address available")
-                        return redirect('main:checkout')
-                else:
-                    print("User is entering a new shipping address")
-                    shipping_address1 = form.cleaned_data.get(
-                        'shipping_address')
-                    shipping_address2 = form.cleaned_data.get(
-                        'shipping_address2')
-                    shipping_country = form.cleaned_data.get(
-                        'shipping_country')
-                    shipping_zip = form.cleaned_data.get('shipping_zip')
-
-                    if is_valid_form([shipping_address1, shipping_country, shipping_zip]):
-                        shipping_address = Address(
-                            user=self.request.user,
-                            street_address=shipping_address1,
-                            apartment_address=shipping_address2,
-                            country=shipping_country,
-                            zip=shipping_zip,
-                            address_type='S'
-                        )
-                        shipping_address.save()
-
-                        order.shipping_address = shipping_address
-                        order.save()
-
-                        set_default_shipping = form.cleaned_data.get(
-                            'set_default_shipping')
-                        if set_default_shipping:
-                            shipping_address.default = True
-                            shipping_address.save()
-
-                    else:
-                        messages.info(
-                            self.request, "Please fill in the required shipping address fields")
-
                 use_default_billing = form.cleaned_data.get(
                     'use_default_billing')
                 same_billing_address = form.cleaned_data.get(
                     'same_billing_address')
 
                 if same_billing_address:
-                    billing_address = shipping_address
+                    billing_address = same_billing_address
                     billing_address.pk = None
-                    billing_address.save()
-                    billing_address.address_type = 'B'
                     billing_address.save()
                     order.billing_address = billing_address
                     order.save()
 
                 elif use_default_billing:
                     print("Using the defualt billing address")
-                    address_qs = Address.objects.filter(
+                    address_qs = BillingAddress.objects.filter(
                         user=self.request.user,
-                        address_type='B',
                         default=True
                     )
                     if address_qs.exists():
@@ -221,13 +156,12 @@ class CheckoutView(View):
                     billing_zip = form.cleaned_data.get('billing_zip')
 
                     if is_valid_form([billing_address1, billing_country, billing_zip]):
-                        billing_address = Address(
+                        billing_address = BillingAddress(
                             user=self.request.user,
                             street_address=billing_address1,
                             apartment_address=billing_address2,
                             country=billing_country,
                             zip=billing_zip,
-                            address_type='B'
                         )
                         billing_address.save()
 
@@ -246,18 +180,18 @@ class CheckoutView(View):
 
                 payment_option = form.cleaned_data.get('payment_option')
 
-                if payment_option == 'C':
+                if payment_option == 'S':
+                    return redirect('main:payment', payment_option='stripe')
+                elif payment_option == 'C':
                     messages.error(self.request, "Cash is unavailable!")
                     return redirect("/")
-                elif payment_option == 'S':
-                    return redirect('main:payment', payment_option='stripe')
                 else:
                     messages.warning(
                         self.request, "Invalid payment option selected")
                     return redirect('main:checkout')
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
-            return redirect("main:order_summary")
+            return redirect("main:order-summary")
 
 
 class PaymentView(View):
