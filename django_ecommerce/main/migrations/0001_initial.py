@@ -49,7 +49,8 @@ class Migration(migrations.Migration):
                 ('category',
                  models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main.category')),
                 (
-                'vendor', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main.vendor')),
+                    'vendor',
+                    models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='main.vendor')),
             ],
         ),
         migrations.CreateModel(

@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'django_ecommerce.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 TESTING = sys.argv[1:2] == ['test']
-if TESTING==False:
+if TESTING == False:
 
     DATABASES = {
         'default': {
@@ -100,11 +100,12 @@ if TESTING==False:
 else:
     DATABASES = {
         'default': {
-        "ENGINE": "django.db.backends.sqlite3",
-        "TEST": {
-            "NAME": os.path.join(BASE_DIR, "test_db.sqlite3"),
+            "ENGINE": "django.db.backends.sqlite3",
+            "TEST": {
+                "NAME": os.path.join(BASE_DIR, "test_db.sqlite3"),
+            }
         }
-    }}
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -162,5 +163,6 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+# STRIPE
 STRIPE_SECRET_KEY = 'sk_test_51JSInCBJEhiNsMQCqvZuJ2P1YLbOt4JavbBQL9lulzAY0Rfs7MCL9K85AJjpMbj6z6iEPlmt6vMxPuvKPrZgGfeH00FNjGCWos'
 STRIPE_PUBLIC_KEY = 'pk_test_51JSInCBJEhiNsMQChVDsFt5lsZsGEPoHsYvEeEgiwPDkjXul3s4doAuNVVcAHAxxLgrx4KjwJFgu0lg3Y9u7Mf3P00If3zQoKk'

@@ -10,4 +10,4 @@ class Command(BaseCommand):
         Vendor.objects.all().delete()
         Product.objects.all().delete()
 
-        print("...Database was cleaned...")
+        print("[INFO]: Database was cleaned.")
