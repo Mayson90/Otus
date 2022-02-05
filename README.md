@@ -2,6 +2,8 @@
 
 > Andrey M
 
+![certificate](880449_Andrey_Mayskiy__course_certificate__Python_Developer._Basic____OTUS.jpg)    
+
 Tree:
 
 - [X] homework_01
@@ -14,7 +16,7 @@ Tree:
 - [X] homework_08
 - [X] homework_09
 - [X] homework_10
-- [ ] homework_11
+- [X] homework_11 https://gitlab.com/Mayson90/otus-homework_11
 
 ### Notes
 
